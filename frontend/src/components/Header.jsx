@@ -1,4 +1,4 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaHome } from 'react-icons/fa';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -17,20 +17,24 @@ function Header() {
   };
   return (
     <header>
-      <Navbar bg='light' variant='light'>
+      <Navbar bg='dark' variant='dark'>
         <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>Support Desk</Navbar.Brand>
-          </LinkContainer>
+          <Navbar.Brand>Support Desk</Navbar.Brand>
+
           <Nav className='ms-auto'>
             {user ? (
               <Nav.Link>
                 <Button variant='primary' onClick={onLogout}>
-                  Logout
+                  <FaSignOutAlt /> Logout
                 </Button>
               </Nav.Link>
             ) : (
               <>
+                <LinkContainer to='/'>
+                  <Nav.Link>
+                    <FaHome /> Home
+                  </Nav.Link>
+                </LinkContainer>
                 <LinkContainer to='/login'>
                   <Nav.Link>
                     <FaSignInAlt /> Login

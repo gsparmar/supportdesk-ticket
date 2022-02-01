@@ -56,7 +56,7 @@ function Login() {
   if (isLoading) {
     return (
       <Container className='d-flex justify-content-center'>
-        <Spinner variant='primary' animation='border' className='d-flex p-2' />
+        <Spinner variant='primary' animation='grow' className='d-flex p-2' />
       </Container>
     );
   }
