@@ -1,10 +1,10 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner, Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../features/auth/authSlice';
+import { login, reset } from '../features/auth/authSlice';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -14,10 +14,25 @@ function Login() {
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth
   );
+
+  useEffect(() => {
+    // display error message
+    if (isError) {
+      toast.error(message);
+    }
+
+    // redirect if logged in
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message, user, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -37,6 +52,14 @@ function Login() {
 
     dispatch(login(userData));
   };
+
+  if (isLoading) {
+    return (
+      <Container className='d-flex justify-content-center'>
+        <Spinner variant='primary' animation='border' className='d-flex p-2' />
+      </Container>
+    );
+  }
 
   return (
     <Fragment>

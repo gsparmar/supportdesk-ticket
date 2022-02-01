@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner, Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -63,6 +63,14 @@ function Register() {
       dispatch(register(userData));
     }
   };
+
+  if (isLoading) {
+    return (
+      <Container className='d-flex justify-content-center'>
+        <Spinner variant='primary' animation='border' className='d-flex p-2' />
+      </Container>
+    );
+  }
 
   return (
     <Fragment>
