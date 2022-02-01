@@ -1,5 +1,5 @@
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,7 +25,9 @@ function Header() {
           <Nav className='ms-auto'>
             {user ? (
               <Nav.Link>
-                <button onClick={onLogout}>Logout</button>
+                <Button variant='primary' onClick={onLogout}>
+                  Logout
+                </Button>
               </Nav.Link>
             ) : (
               <>
