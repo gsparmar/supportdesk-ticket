@@ -1,10 +1,11 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { register } from '../features/auth/authSlice';
+import { register, reset } from '../features/auth/authSlice';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -16,11 +17,27 @@ function Register() {
 
   const { name, email, password, password2 } = formData;
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const { user, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth
   );
+
+  useEffect(() => {
+    // display error message
+    if (isError) {
+      toast.error(message);
+    }
+
+    // redirect if logged in
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message, user, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
