@@ -6,7 +6,9 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import NewTicket from './pages/NewTicket';
 import { Fragment } from 'react';
+import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
     <Fragment>
@@ -18,6 +20,9 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/new-ticket' element={<PrivateRoute />}>
+                <Route path='/new-ticket' element={<NewTicket />} />
+              </Route>
             </Routes>
           </Container>
         </main>
