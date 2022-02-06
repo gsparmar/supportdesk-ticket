@@ -20,7 +20,6 @@ function Header() {
       <Navbar bg='dark' variant='dark'>
         <Container>
           <Navbar.Brand>Support Desk</Navbar.Brand>
-
           <Nav className='ms-auto'>
             {user ? (
               <Nav.Link>
