@@ -96,11 +96,13 @@ function Login() {
             />
           </Form.Group>
 
-          <div className='d-grid gap 2'>
-            <Button variant='primary' type='submit' size='lg'>
-              Submit
-            </Button>
-          </div>
+          <Form.Group className='mb-3'>
+            <div className='d-grid gap 2'>
+              <Button variant='primary' type='submit' size='lg'>
+                Submit
+              </Button>
+            </div>
+          </Form.Group>
         </Form>
       </div>
     </Fragment>
