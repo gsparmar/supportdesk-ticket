@@ -1,15 +1,23 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTicket, reset, closeTicket } from '../features/tickets/ticketSlice';
+import { getTicket, closeTicket } from '../features/tickets/ticketSlice';
+import { getNotes, reset as notesReset } from '../features/notes/noteSlice';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Spinner, Card, Button } from 'react-bootstrap';
 import BackButton from '../components/BackButton';
+import NoteItem from '../components/NoteItem';
 import { toast } from 'react-toastify';
 
 const Ticket = () => {
   const { ticket, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.tickets
   );
+
+  const { notes, isLoading: notesIsLoading } = useSelector(
+    (state) => state.notes
+  );
+
+  const { user } = useSelector((state) => state.auth);
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -22,6 +30,7 @@ const Ticket = () => {
     }
 
     dispatch(getTicket(ticketId));
+    dispatch(getNotes(ticketId));
     // eslint-disable-next-line
   }, [isError, message, isSuccess, ticketId]);
 
@@ -32,7 +41,7 @@ const Ticket = () => {
     navigate('/tickets');
   };
 
-  if (isLoading) {
+  if (isLoading && notesIsLoading) {
     return (
       <Container className='d-flex justify-content-center'>
         <Spinner variant='primary' animation='grow' className='d-flex p-2' />
@@ -63,6 +72,12 @@ const Ticket = () => {
           </Card.Footer>
         </Card>
       </Container>
+      <br />
+      <div>
+        {notes.map((note) => (
+          <NoteItem note={note} key={note._id} />
+        ))}
+      </div>
     </div>
   );
 };
