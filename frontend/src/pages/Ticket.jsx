@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTicket, reset } from '../features/tickets/ticketSlice';
-import { useParams } from 'react-router-dom';
+import { getTicket, reset, closeTicket } from '../features/tickets/ticketSlice';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Spinner, Card, Button } from 'react-bootstrap';
 import BackButton from '../components/BackButton';
 import { toast } from 'react-toastify';
 
 const Ticket = () => {
-  const { ticket, isLoading, isError, message } = useSelector(
+  const { ticket, isLoading, isError, message, isSuccess } = useSelector(
     (state) => state.tickets
   );
 
   const params = useParams();
   const dispatch = useDispatch();
   const { ticketId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isError) {
@@ -23,6 +24,13 @@ const Ticket = () => {
     dispatch(getTicket(ticketId));
     // eslint-disable-next-line
   }, [isError, message, isSuccess, ticketId]);
+
+  // close ticket
+  const onTicketClose = () => {
+    dispatch(closeTicket(ticketId));
+    toast.success('Ticket Closed');
+    navigate('/tickets');
+  };
 
   if (isLoading) {
     return (
@@ -44,7 +52,11 @@ const Ticket = () => {
           <Card.Body>
             <Card.Title>{ticket.product}</Card.Title>
             <Card.Text>{ticket.description}</Card.Text>
-            <Button variant='primary'>{ticket.status}</Button>
+            {ticket.status !== 'closed' && (
+              <Button onClick={onTicketClose} variant='primary'>
+                Close Ticket
+              </Button>
+            )}
           </Card.Body>
           <Card.Footer className='text-muted'>
             Created at: {new Date(ticket.createdAt).toLocaleString('en-US')}
