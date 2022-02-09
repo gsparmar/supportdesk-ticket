@@ -19,7 +19,7 @@ function Home() {
           </Button>
         </div>
       </LinkContainer>
-      <LinkContainer to='/new-ticket'>
+      <LinkContainer to='/tickets'>
         <div className='d-grid gap 2 mb-3'>
           <Button variant='dark' type='submit' size='lg'>
             <FaTicketAlt /> View My Tickets
