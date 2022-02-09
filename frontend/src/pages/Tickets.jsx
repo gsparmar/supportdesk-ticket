@@ -35,7 +35,6 @@ const Tickets = () => {
         <div className='text-center'>
           <p className='h1 fs-1'>Tickets</p>
         </div>
-        <div>{console.log(tickets)}</div>
       </Container>
 
       <Container className='text-center mt-3 '>
