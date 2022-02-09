@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Container, Col, Row, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 const TicketItem = ({ ticket }) => {

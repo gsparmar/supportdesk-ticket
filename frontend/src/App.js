@@ -10,6 +10,7 @@ import NewTicket from './pages/NewTicket';
 import { Fragment } from 'react';
 import PrivateRoute from './components/PrivateRoute';
 import Tickets from './pages/Tickets';
+import Ticket from './pages/Ticket';
 function App() {
   return (
     <Fragment>
@@ -26,6 +27,9 @@ function App() {
               </Route>
               <Route path='/tickets' element={<PrivateRoute />}>
                 <Route path='/tickets' element={<Tickets />} />
+              </Route>
+              <Route path='/ticket/:ticketId' element={<PrivateRoute />}>
+                <Route path='/ticket/:ticketId' element={<Ticket />} />
               </Route>
             </Routes>
           </Container>

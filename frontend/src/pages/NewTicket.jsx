@@ -30,7 +30,7 @@ function NewTicket() {
       navigate('/tickets');
     }
     dispatch(reset());
-  }, [dispatch, isError, isSuccess, navigate, message]);
+  }, [dispatch, isError, navigate, message]);
 
   const onSubmit = (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTickets, reset } from '../features/tickets/ticketSlice';
-import { Spinner, Button, Container, Row, Col } from 'react-bootstrap';
+import { Spinner, Container, Row, Col } from 'react-bootstrap';
 import BackButton from '../components/BackButton';
 import TicketItem from '../components/TicketItem';
 
@@ -19,7 +19,7 @@ const Tickets = () => {
 
   useEffect(() => {
     dispatch(getTickets());
-  }, [dispatch]);
+  }, []);
 
   if (isLoading) {
     return (
