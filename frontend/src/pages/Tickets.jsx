@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTickets, reset } from '../features/tickets/ticketSlice';
-import { Spinner, Button, Container } from 'react-bootstrap';
+import { Spinner, Button, Container, Row, Col } from 'react-bootstrap';
 import BackButton from '../components/BackButton';
+import TicketItem from '../components/TicketItem';
 
 const Tickets = () => {
   const { tickets, isLoading, isSuccess } = useSelector(
@@ -10,11 +11,11 @@ const Tickets = () => {
   );
   const dispatch = useDispatch();
   //dismount // removes console error
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(reset());
-    }
-  }, [dispatch, isSuccess]);
+  //   useEffect(() => {
+  //     if (isSuccess) {
+  //       dispatch(reset());
+  //     }
+  //   }, []);
 
   useEffect(() => {
     dispatch(getTickets());
@@ -28,9 +29,26 @@ const Tickets = () => {
     );
   }
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
+    <>
+      <Container>
+        <BackButton url='/' />
+        <div className='text-center'>
+          <p className='h1 fs-1'>Tickets</p>
+        </div>
+        <div>{console.log(tickets)}</div>
+      </Container>
+
+      <Container className='text-center mt-3 '>
+        <Row className='mb-3 fs-4 '>
+          <Col>Date</Col>
+          <Col>Product</Col>
+          <Col>Status</Col>
+        </Row>
+        {tickets.map((ticket) => (
+          <TicketItem ticket={ticket} key={ticket._id} />
+        ))}
+      </Container>
+    </>
   );
 };
 
