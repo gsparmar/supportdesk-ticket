@@ -1,4 +1,5 @@
 const dotenv = require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const colors = require('colors');
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,22 @@ app.get('/', (req, res) => {
 // routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/tickets', require('./routes/ticketRoutes'));
+
+// Serve Frontend
+if (process.env.NODE_ENV === 'production') {
+  // set build folder as static
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  // send html file from build folder
+  app.get('*', (req, res) =>
+    res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html')
+  );
+} else {
+  // root url - message
+  app.get('/', (req, res) => {
+    res.status(200).json({ message: 'Welcome to the Support Desk API' });
+  });
+}
 
 // error handler
 app.use(errorHandler);
