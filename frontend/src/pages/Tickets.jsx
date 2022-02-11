@@ -10,16 +10,17 @@ const Tickets = () => {
     (state) => state.tickets
   );
   const dispatch = useDispatch();
-  //dismount // removes console error
-  //   useEffect(() => {
-  //     if (isSuccess) {
-  //       dispatch(reset());
-  //     }
-  //   }, []);
+  useEffect(() => {
+    return () => {
+      if (isSuccess) {
+        dispatch(reset());
+      }
+    };
+  }, [dispatch, isSuccess]);
 
   useEffect(() => {
     dispatch(getTickets());
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return (

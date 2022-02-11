@@ -30,7 +30,7 @@ function NewTicket() {
       navigate('/tickets');
     }
     dispatch(reset());
-  }, [dispatch, isError, navigate, message]);
+  }, [dispatch, isError, message, navigate, isSuccess]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -72,6 +72,7 @@ function NewTicket() {
                 id='product'
                 onChange={(e) => setProduct(e.target.value)}
               >
+                <option>Select a Product</option>
                 <option value='iPhone'>iPhone</option>
                 <option value='iPad'>iPad</option>
                 <option value='Macbook Pro'>Macbook Pro</option>
