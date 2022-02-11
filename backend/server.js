@@ -30,10 +30,9 @@ if (process.env.NODE_ENV === 'production') {
 
   // send html file from build folder
   app.get('*', (req, res) =>
-    res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html')
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
   );
 } else {
-  // root url - message
   app.get('/', (req, res) => {
     res.status(200).json({ message: 'Welcome to the Support Desk API' });
   });
