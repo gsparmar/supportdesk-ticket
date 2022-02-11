@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { getTicket, closeTicket } from '../features/tickets/ticketSlice';
-import { getNotes, reset as notesReset } from '../features/notes/noteSlice';
+import {
+  getNotes,
+  reset as notesReset,
+  createNote,
+} from '../features/notes/noteSlice';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { Container, Spinner, Card, Button, Modal, Form } from 'react-bootstrap';
@@ -59,7 +63,7 @@ const Ticket = () => {
   // create note submit
   const onNoteSubmit = (e) => {
     e.preventDefault();
-    console.log('submit');
+    dispatch(createNote({ noteText, ticketId }));
     closeModal();
   };
 
@@ -96,12 +100,6 @@ const Ticket = () => {
       </Container>
       <br />
 
-      <div>
-        {notes.map((note) => (
-          <NoteItem note={note} key={note._id} />
-        ))}
-      </div>
-
       {/* modal */}
       <Modal
         show={modalIsOpen}
@@ -137,11 +135,19 @@ const Ticket = () => {
         </Modal.Body>
       </Modal>
 
-      {ticket.status !== 'closed' && (
-        <Button variant='primary' onClick={openModal}>
-          <FaPlus /> Add Note
-        </Button>
-      )}
+      <div className='mb-3 text-center'>
+        {ticket.status !== 'closed' && (
+          <Button variant='primary' onClick={openModal}>
+            <FaPlus /> Add Note
+          </Button>
+        )}
+      </div>
+
+      <div>
+        {notes.map((note) => (
+          <NoteItem note={note} key={note._id} />
+        ))}
+      </div>
     </div>
   );
 };
