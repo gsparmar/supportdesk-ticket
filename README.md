@@ -10,3 +10,6 @@ Login or Register
  Test credentials:
   - Username: gurv@gmail.com
   - Password: 123456
+
+
+React / Redux / Bootstrap 
