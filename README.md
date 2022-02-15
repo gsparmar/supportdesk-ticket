@@ -4,6 +4,7 @@ https://gpsupportdesk.herokuapp.com/
 
 Login or Register 
  - Logged in user can create and view their support tickets
+ - Authenticated via JWT
  - Add notes on tickets
  - Unable to add notes on tickets with closed status 
  
