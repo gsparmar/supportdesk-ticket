@@ -7,3 +7,6 @@ Login or Register
  - Add notes on tickets
  - Unable to add notes on tickets with closed status 
  
+ Test credentials:
+  - Username: gurv@gmail.com
+  - Password: 123456
